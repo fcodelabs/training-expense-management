@@ -1,0 +1,64 @@
+@media (min-width: 1200px) {
+  .Login {
+    background-color: #c2d6d6;
+    /* min-height: 100vh; */
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+}
+
+.lbody {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  opacity: 0.8;
+  align-items: center;
+  margin: auto;
+  padding-top: 25px;
+}
+#lh1 {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+#lbtn {
+  margin-left: 30px;
+  width: 445px;
+}
+#cabtn {
+  margin-top: 20px;
+  margin-left: 25px;
+}
+#fpbtn {
+  margin-top: 20px;
+  float: right;
+  margin-left: 140px;
+}
+.err-msg {
+  color: red;
+}
+
+@media (max-width: 480px) {
+  .Login {
+    background-color: none;
+    /* min-height: 100vh; */
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+
+  .lbody {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    opacity: 0.8;
+    align-items: center;
+    margin: auto;
+    padding-top: 25px;
+    margin-top: 100px;
+  }
+}
