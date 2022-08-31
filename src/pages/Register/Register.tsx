@@ -1,4 +1,4 @@
-import "../../utils/login.css";
+import "../../utils/register.css";
 
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,16 +9,16 @@ import Button from "@mui/material/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-function LogIn() {
+function Register() {
     const initialValues = {
         email: "",
         password: "",
     };
     const validationSchema = yup.object().shape({
         email: yup.string().email("Please Enter Valid Email").required("Required"),
-        password: yup.string().required("Required"),
+        password: yup.string().min(8, "Password should be of minimum 8 characters length").required("Required"),
     });
     const onSubmit = (values: any) => {
         console.log(values);
@@ -26,16 +26,15 @@ function LogIn() {
 
     const navigate = useNavigate();
 
-    const navigateRegister = () => {
-        navigate("/register");
-    }
+    const navigateLogin = () => {
+        navigate("/");
+    };
     return (
         <React.Fragment>
             <CssBaseline />
-
-            <div className="Login">
-                <div className="lbody">
-                    <h1 id="lh1">Login</h1>
+            <div className="Register">
+                <div className="rbody">
+                    <h1 id="rh1">Register</h1>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
@@ -54,8 +53,7 @@ function LogIn() {
                                 noValidate
                                 autoComplete="off"
                             >
-                                <Field
-                                    as={TextField}
+                                <Field as={TextField}
                                     id="email"
                                     label="Email"
                                     name="email"
@@ -63,13 +61,12 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="email"
-                                            render={(msg) => <span className="err-msg">{msg}</span>}
+                                            render={(rmsg) => <span className="rej-err-msg">{rmsg}</span>}
                                         />
                                     }
                                 />
 
-                                <Field
-                                    as={TextField}
+                                <Field as={TextField}
                                     id="password"
                                     label="Password"
                                     name="password"
@@ -78,25 +75,21 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="password"
-                                            render={(msg) => <span className="err-msg">{msg}</span>}
+                                            render={(rmsg) => <span className="rej-err-msg">{rmsg}</span>}
                                         />
                                     }
                                 />
                             </Box>
                             <Stack spacing={2} direction="row">
-                                <Button variant="contained" id="lbtn" type="submit">
-                                    Sign In
+                                <Button variant="contained" id="rbtn" type="submit">
+                                    Register
                                 </Button>
                             </Stack>
                         </Form>
                     </Formik>
-
                     <Stack spacing={2} direction="row">
-                        <Button variant="text" id="cabtn" onClick={navigateRegister}>
-                            Create Account
-                        </Button>
-                        <Button variant="text" id="fpbtn">
-                            Forgot Password
+                        <Button variant="text" id="bbtn" onClick={navigateLogin}>
+                            Back
                         </Button>
                     </Stack>
                 </div>
@@ -105,4 +98,4 @@ function LogIn() {
     );
 }
 
-export default LogIn;
+export default Register;
