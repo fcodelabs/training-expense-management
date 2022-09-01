@@ -29,6 +29,9 @@ function LogIn() {
     const navigateRegister = () => {
         navigate("/register");
     }
+    const navigateResetPassword = () => {
+        navigate("/resetPassword");
+    }
     return (
         <React.Fragment>
             <CssBaseline />
@@ -95,7 +98,7 @@ function LogIn() {
                         <Button variant="text" id="cabtn" onClick={navigateRegister}>
                             Create Account
                         </Button>
-                        <Button variant="text" id="fpbtn">
+                        <Button variant="text" id="fpbtn" onClick={navigateResetPassword}>
                             Forgot Password
                         </Button>
                     </Stack>
