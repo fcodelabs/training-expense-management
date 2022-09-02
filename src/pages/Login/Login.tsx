@@ -1,5 +1,3 @@
-import "../../utils/login.css";
-
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -9,7 +7,51 @@ import Button from "@mui/material/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+
+import styled from "styled-components";
+
+const Login = styled.div`
+  @media (min-width: 1200px) {
+    background-color: #c2d6d6;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+
+  @media (max-width: 480px) {
+    background-color: none;
+  }
+`;
+
+const Lbody = styled.div`
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  opacity: 0.8;
+  align-items: center;
+  margin: auto;
+  padding-top: 25px;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 150px;
+  }
+`;
+
+const Lh1 = styled.h1`
+  margin-left: 30px;
+  margin-top: 20px;
+`;
+
+const ErrMsg = styled.span`
+  color: red;
+`;
 
 function LogIn() {
     const initialValues = {
@@ -28,17 +70,19 @@ function LogIn() {
 
     const navigateRegister = () => {
         navigate("/register");
-    }
+    };
     const navigateResetPassword = () => {
         navigate("/resetPassword");
-    }
+    };
+    const navigateExpenseHome = () => {
+        navigate("/expenseHome");
+    };
     return (
-        <React.Fragment>
+        <>
             <CssBaseline />
-
-            <div className="Login">
-                <div className="lbody">
-                    <h1 id="lh1">Login</h1>
+            <Login>
+                <Lbody>
+                    <Lh1>Login</Lh1>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
@@ -66,7 +110,7 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="email"
-                                            render={(msg) => <span className="err-msg">{msg}</span>}
+                                            render={(msg) => <ErrMsg>{msg}</ErrMsg>}
                                         />
                                     }
                                 />
@@ -81,13 +125,19 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="password"
-                                            render={(msg) => <span className="err-msg">{msg}</span>}
+                                            render={(msg) => <ErrMsg>{msg}</ErrMsg>}
                                         />
                                     }
                                 />
                             </Box>
                             <Stack spacing={2} direction="row">
-                                <Button variant="contained" id="lbtn" type="submit">
+                                <Button
+                                    variant="contained"
+                                    id="lbtn"
+                                    type="submit"
+                                    style={{ width: "445px", marginLeft: "30px" }}
+                                    onClick={navigateExpenseHome}
+                                >
                                     Sign In
                                 </Button>
                             </Stack>
@@ -95,16 +145,26 @@ function LogIn() {
                     </Formik>
 
                     <Stack spacing={2} direction="row">
-                        <Button variant="text" id="cabtn" onClick={navigateRegister}>
+                        <Button
+                            variant="text"
+                            id="cabtn"
+                            style={{ marginTop: "20px", marginLeft: "25px" }}
+                            onClick={navigateRegister}
+                        >
                             Create Account
                         </Button>
-                        <Button variant="text" id="fpbtn" onClick={navigateResetPassword}>
+                        <Button
+                            variant="text"
+                            id="fpbtn"
+                            style={{ marginTop: "20px", float: "right", marginLeft: "140px" }}
+                            onClick={navigateResetPassword}
+                        >
                             Forgot Password
                         </Button>
                     </Stack>
-                </div>
-            </div>
-        </React.Fragment>
+                </Lbody>
+            </Login>
+        </>
     );
 }
 
