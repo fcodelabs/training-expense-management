@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 
 import styled from "styled-components";
 import ExpenseStatus from "../../components/expenseStatus";
+import ExpenseTable from "../../components/table/expenseTable";
 
 const Exhome = styled.div`
   width: 100vw;
@@ -29,7 +30,7 @@ const Exh1 = styled.h1`
     float: none;
     margin-left: 0;
     text-align: center;
-    font-size:25px
+    font-size: 25px;
   }
 `;
 
@@ -40,7 +41,7 @@ const Signout = styled.div`
   border: none;
   border-radius: 5px;
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     margin-right: 25px;
   }
 
@@ -65,8 +66,14 @@ const Exstatus = styled.div`
 
   @media (max-width: 480px) {
     height: 350px;
-    padding-top:10px;
+    padding-top: 10px;
   }
+`;
+
+const Extable = styled.div`
+  width: 100vw;
+  height: 400px;
+  border: 1px solid black;
 `;
 
 function ExpenseHome() {
@@ -94,6 +101,12 @@ function ExpenseHome() {
                 <Exstatus>
                     <ExpenseStatus />
                 </Exstatus>
+                <>
+                    <CssBaseline />
+                    <Extable>
+                        <ExpenseTable />
+                    </Extable>
+                </>
             </Exhome>
         </>
     );
