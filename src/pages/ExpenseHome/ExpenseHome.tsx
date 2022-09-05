@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import styled from "styled-components";
 import ExpenseStatus from "../../components/expenseStatus";
 import ExpenseTable from "../../components/table/expenseTable";
+import AddExpense from "../../components/adddExpense";
 
 const Exhome = styled.div`
   width: 100vw;
@@ -76,40 +77,58 @@ const Extable = styled.div`
   border: 1px solid black;
 `;
 
+const Addex = styled.div`
+    width: 100vw;
+    height: 270px;
+    border: 1px solid black; 
+
+    @media (max-width: 768px){
+      height : 345px;
+    }
+
+    @media (max-width:480px){
+       height: 345px; 
+    }
+  `;
+
 function ExpenseHome() {
-    return (
+  return (
+    <>
+      <CssBaseline />
+      <Exhome>
+        <Exheader>
+          <div className="exTracker">
+            <Exh1>Expense Tracker</Exh1>
+          </div>
+          <Signout>
+            <Stack spacing={2} direction="row">
+              <Button
+                variant="contained"
+                id="sobtn"
+                style={{ backgroundColor: "#f36d6d" }}
+                sx={{ width: "120px", minWidth: "100%" }}
+              >
+                Sign Out
+              </Button>
+            </Stack>
+          </Signout>
+        </Exheader>
+        <Exstatus>
+          <ExpenseStatus />
+        </Exstatus>
         <>
-            <CssBaseline />
-            <Exhome>
-                <Exheader>
-                    <div className="exTracker">
-                        <Exh1>Expense Tracker</Exh1>
-                    </div>
-                    <Signout>
-                        <Stack spacing={2} direction="row">
-                            <Button
-                                variant="contained"
-                                id="sobtn"
-                                style={{ backgroundColor: "#f36d6d" }}
-                                sx={{ width: "120px", minWidth: "100%" }}
-                            >
-                                Sign Out
-                            </Button>
-                        </Stack>
-                    </Signout>
-                </Exheader>
-                <Exstatus>
-                    <ExpenseStatus />
-                </Exstatus>
-                <>
-                    <CssBaseline />
-                    <Extable>
-                        <ExpenseTable />
-                    </Extable>
-                </>
-            </Exhome>
+          <CssBaseline />
+          <Extable>
+            <ExpenseTable />
+          </Extable>
+
+          <Addex>
+            <AddExpense />
+          </Addex>
         </>
-    );
+      </Exhome>
+    </>
+  );
 }
 
 export default ExpenseHome;
