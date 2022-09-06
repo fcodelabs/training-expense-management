@@ -8,6 +8,11 @@ import ExpenseStatus from "../../components/expenseStatus";
 import ExpenseTable from "../../components/table/expenseTable";
 import AddExpense from "../../components/adddExpense";
 
+import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { logout } from "../../slice/userSlice";
+import { useNavigate } from "react-router-dom";
+
 const Exhome = styled.div`
   width: 100vw;
   height: 100vh;
@@ -78,20 +83,27 @@ const Extable = styled.div`
 `;
 
 const Addex = styled.div`
-    width: 100vw;
-    height: 270px;
-    border: 1px solid black; 
+  width: 100vw;
+  height: 270px;
+  border: 1px solid black;
 
-    @media (max-width: 768px){
-      height : 345px;
-    }
+  @media (max-width: 768px) {
+    height: 345px;
+  }
 
-    @media (max-width:480px){
-       height: 345px; 
-    }
-  `;
+  @media (max-width: 480px) {
+    height: 345px;
+  }
+`;
 
 function ExpenseHome() {
+  const auth = getAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    dispatch(logout({ auth, navigate }));
+  };
   return (
     <>
       <CssBaseline />
@@ -105,6 +117,7 @@ function ExpenseHome() {
               <Button
                 variant="contained"
                 id="sobtn"
+                onClick={logOut}
                 style={{ backgroundColor: "#f36d6d" }}
                 sx={{ width: "120px", minWidth: "100%" }}
               >

@@ -5,8 +5,12 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { ResetPasswordOnSubmit } from "./types";
 
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { fogot } from "../../slice/userSlice";
 
 import styled from "styled-components";
 
@@ -52,17 +56,21 @@ const RpErrMsg = styled.span`
 `;
 
 function ResetPassword() {
+    const auth = getAuth();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const initialValues = {
         email: "",
     };
     const validationSchema = yup.object().shape({
         email: yup.string().email("Please Enter Valid Email").required("Required"),
     });
-    const onSubmit = (values: any) => {
-        console.log(values);
-    };
+    const onSubmit = (e: ResetPasswordOnSubmit) => {
+        const email = e.email;
 
-    const navigate = useNavigate();
+        dispatch(fogot({ auth, email, navigate }))
+    };
 
     const navigateLogin = () => {
         navigate("/");

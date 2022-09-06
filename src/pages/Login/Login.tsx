@@ -6,6 +6,11 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { LoginOnSubmit } from "./types";
+
+import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { login } from "../../slice/userSlice";
 
 import { useNavigate } from "react-router-dom";
 
@@ -54,6 +59,9 @@ const ErrMsg = styled.span`
 `;
 
 function LogIn() {
+    const auth = getAuth();
+    const dispatch = useDispatch();
+
     const initialValues = {
         email: "",
         password: "",
@@ -62,8 +70,11 @@ function LogIn() {
         email: yup.string().email("Please Enter Valid Email").required("Required"),
         password: yup.string().required("Required"),
     });
-    const onSubmit = (values: any) => {
-        console.log(values);
+    const onSubmit = (e: LoginOnSubmit) => {
+        const email = e.email;
+        const password = e.password;
+
+        dispatch(login({ auth, email, password, navigate }))
     };
 
     const navigate = useNavigate();
@@ -74,9 +85,7 @@ function LogIn() {
     const navigateResetPassword = () => {
         navigate("/resetPassword");
     };
-    const navigateExpenseHome = () => {
-        navigate("/expenseHome");
-    };
+
     return (
         <>
             <CssBaseline />
@@ -136,7 +145,6 @@ function LogIn() {
                                     id="lbtn"
                                     type="submit"
                                     style={{ width: "445px", marginLeft: "30px" }}
-                                    onClick={navigateExpenseHome}
                                 >
                                     Sign In
                                 </Button>

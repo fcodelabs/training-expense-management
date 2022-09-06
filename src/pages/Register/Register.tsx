@@ -9,6 +9,12 @@ import * as yup from "yup";
 
 import { useNavigate } from "react-router-dom";
 
+import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { register } from "../../slice/userSlice";
+
+import { RegisterOnSubmit } from "./types";
+
 import styled from "styled-components";
 
 const Reg = styled.div`
@@ -53,7 +59,12 @@ const Rmsg = styled.span`
   color: red;
 `;
 
+
 function Register() {
+    const auth = getAuth();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const initialValues = {
         email: "",
         password: "",
@@ -65,11 +76,12 @@ function Register() {
             .min(8, "Password should be of minimum 8 characters length")
             .required("Required"),
     });
-    const onSubmit = (values: any) => {
-        console.log(values);
-    };
+    const onSubmit = (e: RegisterOnSubmit) => {
+        const email = e.email;
+        const password = e.password;
 
-    const navigate = useNavigate();
+        dispatch(register({ auth, email, password, navigate }));
+    };
 
     const navigateLogin = () => {
         navigate("/");
@@ -122,9 +134,7 @@ function Register() {
                                     helperText={
                                         <ErrorMessage
                                             name="password"
-                                            render={(rmsg) => (
-                                                <span className="rej-err-msg">{rmsg}</span>
-                                            )}
+                                            render={(rmsg) => <Rmsg>{rmsg}</Rmsg>}
                                         />
                                     }
                                 />
