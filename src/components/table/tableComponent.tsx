@@ -25,9 +25,9 @@ function TableComponent({ rows }: TableComponentProps) {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 330 }} size="small" aria-label="a dense table">
                     <TableBody>
-                        {rows.map((row: any) => (
+                        {rows.map((row: Expensearray, index: number) => (
                             <TableRow
-                                key={row.exname}
+                                key={index + row.exname}
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">

@@ -7,21 +7,24 @@ import Button from "@mui/material/Button";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-//import { TypedRegEx } from 'typed-regex';
+import { AddExpenseOnSubmit } from "./types/addExTypes";
+
+import { addEx } from "../slice/expenseSlice";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 
-const Adex = styled.div`
+const AddEx = styled.div`
   margin-left: 20px;
 `;
-const Adp = styled.div`
+const AddPtag = styled.div`
   font-size: 25px;
 
   @media (max-width: 480px) {
     text-align: center;
   }
 `;
-const Adbody = styled.div`
+const AddBody = styled.div`
   width: 600px;
   height: 110px;
   //border: 1px solid black;
@@ -38,7 +41,7 @@ const Adbody = styled.div`
     margin-top: -20px;
   }
 `;
-const AdName = styled.div`
+const AddName = styled.div`
   float: left;
 
   @media (max-width: 768px) {
@@ -49,7 +52,7 @@ const AdName = styled.div`
     width: 330px;
   }
 `;
-const AdCost = styled.div`
+const AddCost = styled.div`
   float: left;
   margin-left: 30px;
 
@@ -63,7 +66,7 @@ const AdCost = styled.div`
     width: 330px;
   }
 `;
-const Adsave = styled.div`
+const AddSave = styled.div`
   float: left;
   margin-top: 10px;
 
@@ -76,33 +79,46 @@ const Exmsg = styled.span`
   color: red;
 `;
 function AddExpense() {
+    const dispatch = useDispatch();
+
     const initialValues = {
         exname: "",
         excost: "",
     };
     const validationSchema = yup.object().shape({
         exname: yup.string().required("Pleace Enter Valid Expense"),
-        excost: yup.number().typeError("Please Enter with Numbers").required("Enter Expense Cost"),
+        excost: yup
+            .number()
+            .typeError("Please Enter with Numbers")
+            .required("Enter Expense Cost"),
     });
-    const onSubmit = (exValues: any) => {
-        console.log(exValues);
+    const onSubmit = (e: AddExpenseOnSubmit) => {
+        console.log(e);
+        const exname = e.exname;
+        const excost = e.excost;
+
+        dispatch(addEx({ exname, excost }));
+
+        e.exname = "";
+        e.excost = "";
     };
+
     return (
         <>
             <CssBaseline />
             <div className="addExpense">
-                <Adex>
-                    <Adp>
+                <AddEx>
+                    <AddPtag>
                         <p>Add Expense</p>
-                    </Adp>
+                    </AddPtag>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
                         validationSchema={validationSchema}
                     >
                         <Form>
-                            <Adbody>
-                                <AdName>
+                            <AddBody>
+                                <AddName>
                                     <p>Name</p>
                                     <Box
                                         component="form"
@@ -130,8 +146,8 @@ function AddExpense() {
                                             }
                                         />
                                     </Box>
-                                </AdName>
-                                <AdCost>
+                                </AddName>
+                                <AddCost>
                                     <p>Cost</p>
                                     <Box
                                         component="form"
@@ -159,21 +175,22 @@ function AddExpense() {
                                             }
                                         />
                                     </Box>
-                                </AdCost>
-                            </Adbody>
-                            <Adsave>
+                                </AddCost>
+                            </AddBody>
+                            <AddSave>
                                 <Stack spacing={2} direction="row">
                                     <Button
                                         variant="contained"
+                                        type="submit"
                                         sx={{ width: "100px", minWidth: "100%" }}
                                     >
                                         Save
                                     </Button>
                                 </Stack>
-                            </Adsave>
+                            </AddSave>
                         </Form>
                     </Formik>
-                </Adex>
+                </AddEx>
             </div>
         </>
     );

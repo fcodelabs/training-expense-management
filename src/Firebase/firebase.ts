@@ -11,6 +11,6 @@ const firebaseConfig = {
 };
 
 //const app = initializeApp(firebaseConfig);
-initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore();
-export const doc = collection(firestore, "userExManagement");
+//export const doc = collection(firestore, "userExManagement");

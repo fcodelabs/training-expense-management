@@ -10,8 +10,9 @@ import AddExpense from "../../components/adddExpense";
 
 import { getAuth } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { logout } from "../../slice/userSlice";
+import { logout, userId } from "../../slice/userSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Exhome = styled.div`
   width: 100vw;
@@ -21,7 +22,7 @@ const Exhome = styled.div`
 const Exheader = styled.div`
   width: 100vw;
   height: 100px;
-  border: 1px solid black;
+  // border: 1px solid black;
 
   @media (max-width: 480px) {
     height: 120px;
@@ -63,7 +64,7 @@ const Signout = styled.div`
 const Exstatus = styled.div`
   width: 100vw;
   height: 125px;
-  border: 1px solid black;
+  // border: 1px solid black;
   padding-top: 20px;
 
   @media (max-width: 768px) {
@@ -79,13 +80,13 @@ const Exstatus = styled.div`
 const Extable = styled.div`
   width: 100vw;
   height: 400px;
-  border: 1px solid black;
+  // border: 1px solid black;
 `;
 
 const Addex = styled.div`
   width: 100vw;
   height: 270px;
-  border: 1px solid black;
+  // border: 1px solid black;
 
   @media (max-width: 768px) {
     height: 345px;
@@ -100,6 +101,10 @@ function ExpenseHome() {
   const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(userId());
+  }, []);
 
   const logOut = () => {
     dispatch(logout({ auth, navigate }));

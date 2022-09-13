@@ -61,6 +61,7 @@ const Rmsg = styled.span`
 
 
 function Register() {
+
     const auth = getAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();

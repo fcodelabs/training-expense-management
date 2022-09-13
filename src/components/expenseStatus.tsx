@@ -9,6 +9,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import styled from "styled-components";
 
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addIn } from "../slice/expenseSlice";
+import { selectTotalExpense, selectTotalIncome } from "../slice/expenseSlice";
 
 const Cexincome = styled.div`
   width: 375px;
@@ -77,8 +81,21 @@ const Edit = styled.div`
 
 function ExpenseStatus() {
     const [isClick, setIsClick] = useState(false);
+    const [incost, setInCost] = useState("");
+
+    const dispatch = useDispatch();
+    const expense = useSelector(selectTotalExpense);
+    const income = useSelector(selectTotalIncome);
+
+    const totIncome = income.totalIncome;
+    const totExpense = expense.totalExpense;
+    const totRemaining = totIncome - totExpense;
 
     const buttonClick = () => {
+        if (incost !== "") {
+            dispatch(addIn({ income: "Income", incost }))
+            setInCost("");
+        }
         setIsClick((current) => !current);
     };
     return (
@@ -96,7 +113,8 @@ function ExpenseStatus() {
                     >
                         {!isClick && (
                             <Typography variant="subtitle1" gutterBottom>
-                                Income :Rs 0000.00
+                                Income :Rs {totIncome}
+
                             </Typography>
                         )}
                     </Box>
@@ -119,6 +137,8 @@ function ExpenseStatus() {
                                 label="Add Income"
                                 variant="standard"
                                 name="incost"
+                                value={incost}
+                                onChange={(e) => setInCost(e.target.value)}
                             />
                         </Box>
                     )}
@@ -140,7 +160,7 @@ function ExpenseStatus() {
                         }}
                     >
                         <Typography variant="subtitle1" gutterBottom>
-                            Remaining :Rs 0000.00
+                            Remaining :Rs {totRemaining ? totRemaining : totIncome}
                         </Typography>
                     </Box>
                 </Cexremaining>
@@ -154,7 +174,7 @@ function ExpenseStatus() {
                         }}
                     >
                         <Typography variant="subtitle1" gutterBottom>
-                            Spent :Rs 0000.00
+                            Spent :Rs {totExpense}
                         </Typography>
                     </Box>
                 </Cexspent>
