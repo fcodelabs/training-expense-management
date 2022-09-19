@@ -59,7 +59,6 @@ const Rmsg = styled.span`
   color: red;
 `;
 
-
 function Register() {
     const auth = getAuth();
     const dispatch = useDispatch();
