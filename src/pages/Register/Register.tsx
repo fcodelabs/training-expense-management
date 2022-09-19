@@ -17,7 +17,7 @@ import { RegisterOnSubmit } from "./types";
 
 import styled from "styled-components";
 
-const Reg = styled.div`
+const RegisterContainer = styled.div`
   @media (min-width: 1200px) {
     background-color: #c2d6d6;
     height: 100vh;
@@ -32,7 +32,7 @@ const Reg = styled.div`
   }
 `;
 
-const Rbody = styled.div`
+const RegisterBody = styled.div`
   width: 500px;
   height: 500px;
   background-color: white;
@@ -50,12 +50,12 @@ const Rbody = styled.div`
   }
 `;
 
-const Rh1 = styled.h1`
+const RegH1Tag = styled.h1`
   margin-left: 30px;
   margin-top: 20px;
 `;
 
-const Rmsg = styled.span`
+const RegErrMsg = styled.span`
   color: red;
 `;
 
@@ -90,9 +90,9 @@ function Register() {
     return (
         <>
             <CssBaseline />
-            <Reg>
-                <Rbody>
-                    <Rh1>Register</Rh1>
+            <RegisterContainer>
+                <RegisterBody>
+                    <RegH1Tag>Register</RegH1Tag>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
@@ -120,7 +120,7 @@ function Register() {
                                     helperText={
                                         <ErrorMessage
                                             name="email"
-                                            render={(rmsg) => <Rmsg>{rmsg}</Rmsg>}
+                                            render={(rmsg) => <RegErrMsg>{rmsg}</RegErrMsg>}
                                         />
                                     }
                                 />
@@ -135,7 +135,7 @@ function Register() {
                                     helperText={
                                         <ErrorMessage
                                             name="password"
-                                            render={(rmsg) => <Rmsg>{rmsg}</Rmsg>}
+                                            render={(rmsg) => <RegErrMsg>{rmsg}</RegErrMsg>}
                                         />
                                     }
                                 />
@@ -162,8 +162,8 @@ function Register() {
                             Back
                         </Button>
                     </Stack>
-                </Rbody>
-            </Reg>
+                </RegisterBody>
+            </RegisterContainer>
         </>
     );
 }

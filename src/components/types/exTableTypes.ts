@@ -1,6 +1,6 @@
 export interface FilterType {
   exname: string;
-  excost: number;
+  excost: string;
 }
 
 export interface SearchArray {

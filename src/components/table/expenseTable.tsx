@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { FilterType } from "./exTableTypes";
+import { FilterType, SearchArray } from "../types/exTableTypes";
 
 const HistoryPtag = styled.div`
   margin-left: 20px;
@@ -28,6 +28,10 @@ const HistoryTable = styled.div`
   margin-top: 10px;
   width: 95.3%;
 
+  @media (max-width: 1024px) {
+    width: 94%;
+  }
+
   @media (max-width: 768px) {
     width: 94%;
   }
@@ -38,6 +42,10 @@ const HistoryTable = styled.div`
 `;
 const HistorySearch = styled.div`
   margin-left: 20px;
+
+  @media (max-width: 1024px) {
+    width: 94%;
+  }
 
   @media (max-width: 768px) {
     width: 94%;
@@ -51,12 +59,13 @@ const HistorySearch = styled.div`
 
 function ExpenseTable() {
   const [innerValue, setInnerValue] = useState("");
-  const [filterArray, setFilterArray] = useState([]);
+  const [filterArray, setFilterArray] = useState<Array<FilterType>>([]);
 
   const dispatch = useDispatch();
   const userExpenseIncome = useSelector(selectExpense);
 
-  const search = (rows: any) => {
+  const search = (rows: Array<FilterType>) => {
+    console.log(rows)
     return rows.filter((row: FilterType) =>
       row.exname.toLowerCase().includes(innerValue.trim())
     );

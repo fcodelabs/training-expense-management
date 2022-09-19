@@ -13,9 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addIn } from "../slice/expenseSlice";
 import { selectTotalExpense, selectTotalIncome } from "../slice/expenseSlice";
+import formatToCurrency from "../utils/currency";
 
-const Cexincome = styled.div`
-  width: 375px;
+const ExIncome = styled.div`
+  width: 32%;
   height: 100px;
   float: left;
   margin-left: 20px;
@@ -30,14 +31,18 @@ const Cexincome = styled.div`
     width: 330px;
   }
 `;
-const Cexremaining = styled.div`
-  width: 375px;
+const ExRemaining = styled.div`
+  width: 29%;
   height: 100px;
   /* border: 1px solid black; */
   float: left;
-  margin-left: 90px;
+  margin-left: 40px;
   background-color: rgb(176, 252, 227);
   border-radius: 10px;
+
+  @media (max-width: 1024px) {
+    margin-left: 20px;
+  }
 
   @media (max-width: 768px) {
     margin-left: 20px;
@@ -51,14 +56,18 @@ const Cexremaining = styled.div`
     margin-top: 10px;
   }
 `;
-const Cexspent = styled.div`
-  width: 375px;
+const ExSpent = styled.div`
+  width: 28.5%;
   height: 100px;
   /* border: 1px solid black; */
   float: left;
-  margin-left: 90px;
+  margin-left: 40px;
   background-color: rgb(2, 173, 173);
   border-radius: 10px;
+
+  @media (max-width: 1024px) {
+    margin-left: 20px;
+  }
 
   @media (max-width: 768px) {
     margin-left: 20px;
@@ -87,13 +96,13 @@ function ExpenseStatus() {
     const expense = useSelector(selectTotalExpense);
     const income = useSelector(selectTotalIncome);
 
-    const totIncome = income.totalIncome;
-    const totExpense = expense.totalExpense;
-    const totRemaining = totIncome - totExpense;
+    const totIncome = formatToCurrency(income.totalIncome);
+    const totExpense = formatToCurrency(expense.totalExpense);
+    const totRemaining = formatToCurrency(income.totalIncome - expense.totalExpense);
 
     const buttonClick = () => {
         if (incost !== "") {
-            dispatch(addIn({ income: "Income", incost }))
+            dispatch(addIn({ income: "Income", incost }));
             setInCost("");
         }
         setIsClick((current) => !current);
@@ -102,7 +111,7 @@ function ExpenseStatus() {
         <>
             <CssBaseline />
             <div className="cexStatus">
-                <Cexincome>
+                <ExIncome>
                     <Box
                         sx={{
                             width: "100%",
@@ -113,8 +122,7 @@ function ExpenseStatus() {
                     >
                         {!isClick && (
                             <Typography variant="subtitle1" gutterBottom>
-                                Income :Rs {totIncome}
-
+                                Income: Rs {totIncome}
                             </Typography>
                         )}
                     </Box>
@@ -149,8 +157,8 @@ function ExpenseStatus() {
                             </Button>
                         </Stack>
                     </Edit>
-                </Cexincome>
-                <Cexremaining>
+                </ExIncome>
+                <ExRemaining>
                     <Box
                         sx={{
                             width: "100%",
@@ -160,11 +168,11 @@ function ExpenseStatus() {
                         }}
                     >
                         <Typography variant="subtitle1" gutterBottom>
-                            Remaining :Rs {totRemaining ? totRemaining : totIncome}
+                            Remaining: Rs {totRemaining}
                         </Typography>
                     </Box>
-                </Cexremaining>
-                <Cexspent>
+                </ExRemaining>
+                <ExSpent>
                     <Box
                         sx={{
                             width: "100%",
@@ -174,10 +182,10 @@ function ExpenseStatus() {
                         }}
                     >
                         <Typography variant="subtitle1" gutterBottom>
-                            Spent :Rs {totExpense}
+                            Spent: Rs {totExpense}
                         </Typography>
                     </Box>
-                </Cexspent>
+                </ExSpent>
             </div>
         </>
     );

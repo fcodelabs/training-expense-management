@@ -15,7 +15,7 @@ interface TableComponentProps {
 }
 interface Expensearray {
     exname: string;
-    excost: number;
+    excost: string;
 }
 
 function TableComponent({ rows }: TableComponentProps) {

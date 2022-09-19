@@ -22,7 +22,7 @@ const Exhome = styled.div`
 const Exheader = styled.div`
   width: 100vw;
   height: 100px;
-  // border: 1px solid black;
+  //  border: 1px solid black;
 
   @media (max-width: 480px) {
     height: 120px;
@@ -54,7 +54,7 @@ const Signout = styled.div`
 
   @media (max-width: 480px) {
     float: none;
-    margin-top: -15px;
+    margin-top: -10px;
     margin-right: 0;
     margin-left: 20px;
     width: 330px;
@@ -79,7 +79,8 @@ const Exstatus = styled.div`
 
 const Extable = styled.div`
   width: 100vw;
-  height: 400px;
+  min-height: 200px;
+  height: fix-content;
   // border: 1px solid black;
 `;
 

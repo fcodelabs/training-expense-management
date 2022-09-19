@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "@firebase/firestore";
+import { getFirestore } from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.React_App_apiKey as string,
@@ -10,7 +10,5 @@ const firebaseConfig = {
   appId: process.env.React_App_appId as string,
 };
 
-//const app = initializeApp(firebaseConfig);
 export const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore();
-//export const doc = collection(firestore, "userExManagement");

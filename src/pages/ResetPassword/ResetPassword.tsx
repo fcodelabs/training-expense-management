@@ -14,7 +14,7 @@ import { fogot } from "../../slice/userSlice";
 
 import styled from "styled-components";
 
-const RPassword = styled.div`
+const ResetPasswordContainer = styled.div`
   @media (min-width: 1200px) {
     background-color: #c2d6d6;
     height: 100vh;
@@ -28,7 +28,7 @@ const RPassword = styled.div`
     background-color: none;
   }
 `;
-const Rpbody = styled.div`
+const ResetPasswordBody = styled.div`
   width: 500px;
   height: 350px;
   background-color: white;
@@ -46,7 +46,7 @@ const Rpbody = styled.div`
   }
 `;
 
-const Rph1 = styled.h1`
+const RPh1Tag = styled.h1`
   margin-left: 30px;
   margin-top: 20px;
 `;
@@ -69,16 +69,16 @@ function ResetPassword() {
     const onSubmit = (e: ResetPasswordOnSubmit) => {
         const email = e.email;
 
-        dispatch(fogot({ auth, email, navigate }))
+        dispatch(fogot({ auth, email }))
     };
 
     const navigateLogin = () => {
         navigate("/");
     };
     return (
-        <RPassword>
-            <Rpbody>
-                <Rph1>Reset Password</Rph1>
+        <ResetPasswordContainer>
+            <ResetPasswordBody>
+                <RPh1Tag>Reset Password</RPh1Tag>
                 <Formik
                     initialValues={initialValues}
                     onSubmit={onSubmit}
@@ -129,8 +129,8 @@ function ResetPassword() {
                         Back
                     </Button>
                 </Stack>
-            </Rpbody>
-        </RPassword>
+            </ResetPasswordBody>
+        </ResetPasswordContainer>
     );
 }
 

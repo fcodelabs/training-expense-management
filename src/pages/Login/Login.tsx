@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
-const Login = styled.div`
+const LoginContainer = styled.div`
   @media (min-width: 1200px) {
     background-color: #c2d6d6;
     height: 100vh;
@@ -31,7 +31,7 @@ const Login = styled.div`
   }
 `;
 
-const Lbody = styled.div`
+const LoginBody = styled.div`
   width: 500px;
   height: 500px;
   background-color: white;
@@ -49,12 +49,12 @@ const Lbody = styled.div`
   }
 `;
 
-const Lh1 = styled.h1`
+const LoginH1Tag = styled.h1`
   margin-left: 30px;
   margin-top: 20px;
 `;
 
-const ErrMsg = styled.span`
+const LogErrMsg = styled.span`
   color: red;
 `;
 
@@ -89,9 +89,9 @@ function LogIn() {
     return (
         <>
             <CssBaseline />
-            <Login>
-                <Lbody>
-                    <Lh1>Login</Lh1>
+            <LoginContainer>
+                <LoginBody>
+                    <LoginH1Tag>Login</LoginH1Tag>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
@@ -119,7 +119,7 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="email"
-                                            render={(msg) => <ErrMsg>{msg}</ErrMsg>}
+                                            render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
                                         />
                                     }
                                 />
@@ -134,7 +134,7 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="password"
-                                            render={(msg) => <ErrMsg>{msg}</ErrMsg>}
+                                            render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
                                         />
                                     }
                                 />
@@ -170,8 +170,8 @@ function LogIn() {
                             Forgot Password
                         </Button>
                     </Stack>
-                </Lbody>
-            </Login>
+                </LoginBody>
+            </LoginContainer>
         </>
     );
 }

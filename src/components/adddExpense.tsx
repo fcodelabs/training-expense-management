@@ -9,13 +9,17 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { AddExpenseOnSubmit } from "./types/addExTypes";
 
-import { addEx } from "../slice/expenseSlice";
-import { useDispatch } from "react-redux";
+import {
+    addEx,
+    selectTotalExpense,
+    selectTotalIncome,
+} from "../slice/expenseSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 
 const AddEx = styled.div`
-  margin-left: 20px;
+  padding-left: 20px;
 `;
 const AddPtag = styled.div`
   font-size: 25px;
@@ -81,6 +85,12 @@ const Exmsg = styled.span`
 function AddExpense() {
     const dispatch = useDispatch();
 
+    const expense = useSelector(selectTotalExpense);
+    const income = useSelector(selectTotalIncome);
+
+    const totIncome = income.totalIncome;
+    const totExpense = expense.totalExpense;
+
     const initialValues = {
         exname: "",
         excost: "",
@@ -97,8 +107,13 @@ function AddExpense() {
         const exname = e.exname;
         const excost = e.excost;
 
-        dispatch(addEx({ exname, excost }));
-
+        if (totIncome === 0) {
+            alert("Cannot Add Expenses");
+        } else if (totIncome <= totExpense) {
+            alert("Cannot Add Expenses");
+        } else {
+            dispatch(addEx({ exname, excost }));
+        }
         e.exname = "";
         e.excost = "";
     };

@@ -27,24 +27,37 @@ import { takeEvery, put, call, select } from "redux-saga/effects";
 //import { doc } from "../Firebase/firebase";
 import { firestore } from "../Firebase/firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  AddAllExpenseType,
+  AddExpenseType,
+  AddIncomeType,
+  LoginUserType,
+  NumberType,
+  RegisterUserType,
+  ResetPaswordType,
+  UserDataType,
+  UserSignOutType,
+  UserType,
+} from "./types";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const id = user.uid;
-    localStorage.setItem("Uid", id);
+    localStorage.setItem("UId", id);
   } else {
     console.log("User SignOut");
   }
 });
 
-function* getUserId(): any {
-  const id = yield localStorage.getItem("Uid");
-  yield put(saveId({ Uid: id }));
+function* getUserId(): Generator {
+  const id = yield localStorage.getItem("UId");
+  yield put(saveId({ uId: id }));
 }
 
-function* registerUser({ payload }: any) {
+function* registerUser({ payload }: PayloadAction<RegisterUserType>) {
   yield createUserWithEmailAndPassword(
     payload.auth,
     payload.email,
@@ -62,7 +75,7 @@ function* registerUser({ payload }: any) {
     });
 }
 
-function* loginUser({ payload }: any) {
+function* loginUser({ payload }: PayloadAction<LoginUserType>) {
   yield signInWithEmailAndPassword(
     payload.auth,
     payload.email,
@@ -79,7 +92,7 @@ function* loginUser({ payload }: any) {
     });
 }
 
-function* userSignOut({ payload }: any) {
+function* userSignOut({ payload }: PayloadAction<UserSignOutType>) {
   yield signOut(payload.auth)
     .then(() => {
       alert("Successfully Signout");
@@ -90,7 +103,8 @@ function* userSignOut({ payload }: any) {
     });
 }
 
-function* userResetPassword({ payload }: any) {
+function* userResetPassword({ payload }: PayloadAction<ResetPaswordType>) {
+  console.log("payload ", payload);
   yield sendPasswordResetEmail(payload.auth, payload.email)
     .then(() => {
       alert("Send Password Reset Email");
@@ -101,9 +115,9 @@ function* userResetPassword({ payload }: any) {
     });
 }
 
-function* addAllExpense({ payload }: any): any {
-  const user: any = yield select(selectUser);
-  const uid = user.Uid;
+function* addAllExpense({ payload }: PayloadAction<AddExpenseType>): any {
+  const user: UserType = yield select(selectUser);
+  const uid = user.uId;
   try {
     yield addDoc(collection(firestore, uid), {
       exname: payload.exname,
@@ -118,9 +132,9 @@ function* addAllExpense({ payload }: any): any {
   }
 }
 
-function* addAllIncome({ payload }: any): any {
-  const user: any = yield select(selectUser);
-  const uid = user.Uid;
+function* addAllIncome({ payload }: PayloadAction<AddIncomeType>): any {
+  const user: UserType = yield select(selectUser);
+  const uid = user.uId;
 
   try {
     yield addDoc(collection(firestore, uid), {
@@ -138,16 +152,17 @@ function* addAllIncome({ payload }: any): any {
 
 const getAllExpenseIncome = async (uid: string) => {
   try {
-    const userData: any = [];
+    const userData: Array<UserDataType> = [];
     let totalEx = 0;
     let totalIn = 0;
 
     const querySnapshot = await getDocs(collection(firestore, uid));
     querySnapshot.forEach((doc) => {
       console.log(doc.id, " => ", doc.data());
-      userData.push(doc.data());
+      const data = { exname: doc.data().exname, excost: doc.data().excost };
+      userData.push(data);
     });
-    userData.map((number: any) => {
+    userData.map((number: NumberType) => {
       (number.exname !== "Income" &&
         (totalEx = totalEx + parseInt(number.excost))) ||
         (totalIn = totalIn + parseInt(number.excost));
@@ -163,8 +178,8 @@ const getAllExpenseIncome = async (uid: string) => {
 };
 
 function* saveAllExpenseIncome(): any {
-  const user: any = yield select(selectUser);
-  const uid = user.Uid;
+  const user: UserType = yield select(selectUser);
+  const uid = user.uId;
   try {
     if (uid) {
       const response = yield call(getAllExpenseIncome, uid);
