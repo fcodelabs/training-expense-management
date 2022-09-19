@@ -8,7 +8,6 @@ import * as yup from "yup";
 
 import { useNavigate } from "react-router-dom";
 
-<<<<<<< HEAD
 import { getAuth } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { register } from "../../slice/userSlice";
@@ -18,11 +17,6 @@ import { RegisterOnSubmit } from "./types";
 import styled from "styled-components";
 
 const RegisterContainer = styled.div`
-=======
-import styled from "styled-components";
-
-const Reg = styled.div`
->>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
   @media (min-width: 1200px) {
     background-color: #c2d6d6;
     height: 100vh;
@@ -37,11 +31,7 @@ const Reg = styled.div`
   }
 `;
 
-<<<<<<< HEAD
 const RegisterBody = styled.div`
-=======
-const Rbody = styled.div`
->>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
   width: 500px;
   height: 500px;
   background-color: white;
@@ -59,27 +49,16 @@ const Rbody = styled.div`
   }
 `;
 
-<<<<<<< HEAD
 const RegH1Tag = styled.h1`
-=======
-const Rh1 = styled.h1`
->>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
   margin-left: 30px;
   margin-top: 20px;
 `;
 
-<<<<<<< HEAD
 const RegErrMsg = styled.span`
   color: red;
 `;
 
 
-=======
-const Rmsg = styled.span`
-  color: red;
-`;
-
->>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
 function Register() {
 
     const auth = getAuth();
@@ -108,7 +87,6 @@ function Register() {
         navigate("/");
     };
     return (
-<<<<<<< HEAD
         <RegisterContainer>
             <RegisterBody>
                 <RegH1Tag>Register</RegH1Tag>
@@ -183,87 +161,6 @@ function Register() {
                 </Stack>
             </RegisterBody>
         </RegisterContainer>
-=======
-        <React.Fragment>
-            <CssBaseline />
-            <Reg>
-                <Rbody>
-                    <Rh1>Register</Rh1>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={onSubmit}
-                        validationSchema={validationSchema}
-                    >
-                        <Form>
-                            <Box
-                                component="form"
-                                sx={{
-                                    "& > :not(style)": {
-                                        m: 2,
-                                        marginLeft: "30px",
-                                        width: "50ch",
-                                    },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <Field
-                                    as={TextField}
-                                    id="email"
-                                    label="Email"
-                                    name="email"
-                                    variant="outlined"
-                                    helperText={
-                                        <ErrorMessage
-                                            name="email"
-                                            render={(rmsg) => <Rmsg>{rmsg}</Rmsg>}
-                                        />
-                                    }
-                                />
-
-                                <Field
-                                    as={TextField}
-                                    id="password"
-                                    label="Password"
-                                    name="password"
-                                    variant="outlined"
-                                    type="password"
-                                    helperText={
-                                        <ErrorMessage
-                                            name="password"
-                                            render={(rmsg) => (
-                                                <span className="rej-err-msg">{rmsg}</span>
-                                            )}
-                                        />
-                                    }
-                                />
-                            </Box>
-                            <Stack spacing={2} direction="row">
-                                <Button
-                                    variant="contained"
-                                    id="rbtn"
-                                    type="submit"
-                                    style={{ marginLeft: "30px", width: "445px" }}
-                                >
-                                    Register
-                                </Button>
-                            </Stack>
-                        </Form>
-                    </Formik>
-                    <Stack spacing={2} direction="row">
-                        <Button
-                            variant="text"
-                            id="bbtn"
-                            style={{ marginTop: "20px", marginLeft: "25px" }}
-                            onClick={navigateLogin}
-                        >
-                            Back
-                        </Button>
-                    </Stack>
-                </Rbody>
-            </Reg>
-        </React.Fragment>
->>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
     );
 }
 
