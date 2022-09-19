@@ -5,34 +5,32 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { LoginOnSubmit } from "./types";
-
-import { getAuth } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { login } from "../../slice/userSlice";
+import { ResetPasswordOnSubmit } from "./types";
 
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { fogot } from "../../slice/userSlice";
 
 import styled from "styled-components";
 
-const LoginContainer = styled.div`
+const ResetPasswordContainer = styled.div`
   @media (min-width: 1200px) {
     background-color: #c2d6d6;
     height: 100vh;
     width: 100vw;
     align-items: center;
     justify-content: center;
-    padding-top: 50px;
+    padding-top: 100px;
   }
 
   @media (max-width: 480px) {
     background-color: none;
   }
 `;
-
-const LoginBody = styled.div`
+const ResetPasswordBody = styled.div`
   width: 500px;
-  height: 500px;
+  height: 350px;
   background-color: white;
   opacity: 0.8;
   align-items: center;
@@ -40,55 +38,47 @@ const LoginBody = styled.div`
   padding-top: 25px;
 
   @media (max-width: 768px) {
-    margin-top: 50px;
+    margin-top: 100px;
   }
 
   @media (max-width: 480px) {
-    margin-top: 150px;
+    margin-top: 200px;
   }
 `;
 
-const LoginH1Tag = styled.h1`
+const RPh1Tag = styled.h1`
   margin-left: 30px;
   margin-top: 20px;
 `;
 
-const LogErrMsg = styled.span`
+const RpErrMsg = styled.span`
   color: red;
 `;
 
-function LogIn() {
+function ResetPassword() {
     const auth = getAuth();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const initialValues = {
         email: "",
-        password: "",
     };
     const validationSchema = yup.object().shape({
         email: yup.string().email("Please Enter Valid Email").required("Required"),
-        password: yup.string().required("Required"),
     });
-    const onSubmit = (e: LoginOnSubmit) => {
+    const onSubmit = (e: ResetPasswordOnSubmit) => {
         const email = e.email;
-        const password = e.password;
 
-        dispatch(login({ auth, email, password, navigate }))
+        dispatch(fogot({ auth, email }))
     };
 
-    const navigate = useNavigate();
-
-    const navigateRegister = () => {
-        navigate("/register");
+    const navigateLogin = () => {
+        navigate("/");
     };
-    const navigateResetPassword = () => {
-        navigate("/resetPassword");
-    };
-
     return (
-        <LoginContainer>
-            <LoginBody>
-                <LoginH1Tag>Login</LoginH1Tag>
+        <ResetPasswordContainer>
+            <ResetPasswordBody>
+                <RPh1Tag>Reset Password</RPh1Tag>
                 <Formik
                     initialValues={initialValues}
                     onSubmit={onSubmit}
@@ -98,11 +88,7 @@ function LogIn() {
                         <Box
                             component="form"
                             sx={{
-                                "& > :not(style)": {
-                                    m: 2,
-                                    marginLeft: "30px",
-                                    width: "50ch",
-                                },
+                                "& > :not(style)": { m: 4, width: "50ch" },
                             }}
                             noValidate
                             autoComplete="off"
@@ -116,22 +102,7 @@ function LogIn() {
                                 helperText={
                                     <ErrorMessage
                                         name="email"
-                                        render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
-                                    />
-                                }
-                            />
-
-                            <Field
-                                as={TextField}
-                                id="password"
-                                label="Password"
-                                name="password"
-                                variant="outlined"
-                                type="password"
-                                helperText={
-                                    <ErrorMessage
-                                        name="password"
-                                        render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
+                                        render={(rpmsg) => <RpErrMsg>{rpmsg}</RpErrMsg>}
                                     />
                                 }
                             />
@@ -139,37 +110,28 @@ function LogIn() {
                         <Stack spacing={2} direction="row">
                             <Button
                                 variant="contained"
-                                id="lbtn"
+                                id="rpbtn"
                                 type="submit"
-                                style={{ width: "445px", marginLeft: "30px" }}
+                                style={{ width: "430px", marginLeft: "32px" }}
                             >
-                                Sign In
+                                Send Password Reset Link
                             </Button>
                         </Stack>
                     </Form>
                 </Formik>
-
                 <Stack spacing={2} direction="row">
                     <Button
                         variant="text"
-                        id="cabtn"
+                        id="bbtn"
+                        onClick={navigateLogin}
                         style={{ marginTop: "20px", marginLeft: "25px" }}
-                        onClick={navigateRegister}
                     >
-                        Create Account
-                    </Button>
-                    <Button
-                        variant="text"
-                        id="fpbtn"
-                        style={{ marginTop: "20px", float: "right", marginLeft: "140px" }}
-                        onClick={navigateResetPassword}
-                    >
-                        Forgot Password
+                        Back
                     </Button>
                 </Stack>
-            </LoginBody>
-        </LoginContainer>
+            </ResetPasswordBody>
+        </ResetPasswordContainer>
     );
 }
 
-export default LogIn;
+export default ResetPassword;
