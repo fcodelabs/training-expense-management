@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import CssBaseline from "@mui/material/CssBaseline";
 
 import styled from "styled-components";
 
@@ -108,86 +107,83 @@ function ExpenseStatus() {
         setIsClick((current) => !current);
     };
     return (
-        <>
-            <CssBaseline />
-            <div className="cexStatus">
-                <ExIncome>
-                    <Box
-                        sx={{
-                            width: "100%",
-                            maxWidth: 500,
-                            marginLeft: "20px",
-                            marginTop: "30px",
-                        }}
-                    >
-                        {!isClick && (
-                            <Typography variant="subtitle1" gutterBottom>
-                                Income: Rs {totIncome}
-                            </Typography>
-                        )}
-                    </Box>
-                    {isClick && (
-                        <Box
-                            component="form"
-                            sx={{
-                                "& > :not(style)": {
-                                    m: 1,
-                                    width: "20ch",
-                                    marginTop: "-20px",
-                                    marginLeft: "20px",
-                                },
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <TextField
-                                id="standard-basic"
-                                label="Add Income"
-                                variant="standard"
-                                name="incost"
-                                value={incost}
-                                onChange={(e) => setInCost(e.target.value)}
-                            />
-                        </Box>
+        <div className="cexStatus">
+            <ExIncome>
+                <Box
+                    sx={{
+                        width: "100%",
+                        maxWidth: 500,
+                        marginLeft: "20px",
+                        marginTop: "30px",
+                    }}
+                >
+                    {!isClick && (
+                        <Typography variant="subtitle1" gutterBottom>
+                            Income: Rs {totIncome}
+                        </Typography>
                     )}
-                    <Edit>
-                        <Stack spacing={2} direction="row">
-                            <Button variant="contained" onClick={buttonClick}>
-                                {isClick ? "Save" : "Edit"}
-                            </Button>
-                        </Stack>
-                    </Edit>
-                </ExIncome>
-                <ExRemaining>
+                </Box>
+                {isClick && (
                     <Box
+                        component="form"
                         sx={{
-                            width: "100%",
-                            maxWidth: 500,
-                            marginLeft: "20px",
-                            marginTop: "30px",
+                            "& > :not(style)": {
+                                m: 1,
+                                width: "20ch",
+                                marginTop: "-20px",
+                                marginLeft: "20px",
+                            },
                         }}
+                        noValidate
+                        autoComplete="off"
                     >
-                        <Typography variant="subtitle1" gutterBottom>
-                            Remaining: Rs {totRemaining}
-                        </Typography>
+                        <TextField
+                            id="standard-basic"
+                            label="Add Income"
+                            variant="standard"
+                            name="incost"
+                            value={incost}
+                            onChange={(e) => setInCost(e.target.value)}
+                        />
                     </Box>
-                </ExRemaining>
-                <ExSpent>
-                    <Box
-                        sx={{
-                            width: "100%",
-                            maxWidth: 500,
-                            marginLeft: "20px",
-                            marginTop: "30px",
-                        }}
-                    >
-                        <Typography variant="subtitle1" gutterBottom>
-                            Spent: Rs {totExpense}
-                        </Typography>
-                    </Box>
-                </ExSpent>
-            </div>
-        </>
+                )}
+                <Edit>
+                    <Stack spacing={2} direction="row">
+                        <Button variant="contained" onClick={buttonClick}>
+                            {isClick ? "Save" : "Edit"}
+                        </Button>
+                    </Stack>
+                </Edit>
+            </ExIncome>
+            <ExRemaining>
+                <Box
+                    sx={{
+                        width: "100%",
+                        maxWidth: 500,
+                        marginLeft: "20px",
+                        marginTop: "30px",
+                    }}
+                >
+                    <Typography variant="subtitle1" gutterBottom>
+                        Remaining: Rs {totRemaining}
+                    </Typography>
+                </Box>
+            </ExRemaining>
+            <ExSpent>
+                <Box
+                    sx={{
+                        width: "100%",
+                        maxWidth: 500,
+                        marginLeft: "20px",
+                        marginTop: "30px",
+                    }}
+                >
+                    <Typography variant="subtitle1" gutterBottom>
+                        Spent: Rs {totExpense}
+                    </Typography>
+                </Box>
+            </ExSpent>
+        </div>
     );
 }
 

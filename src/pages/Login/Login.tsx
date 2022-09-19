@@ -1,5 +1,4 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -87,92 +86,89 @@ function LogIn() {
     };
 
     return (
-        <>
-            <CssBaseline />
-            <LoginContainer>
-                <LoginBody>
-                    <LoginH1Tag>Login</LoginH1Tag>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={onSubmit}
-                        validationSchema={validationSchema}
-                    >
-                        <Form>
-                            <Box
-                                component="form"
-                                sx={{
-                                    "& > :not(style)": {
-                                        m: 2,
-                                        marginLeft: "30px",
-                                        width: "50ch",
-                                    },
-                                }}
-                                noValidate
-                                autoComplete="off"
+        <LoginContainer>
+            <LoginBody>
+                <LoginH1Tag>Login</LoginH1Tag>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                    validationSchema={validationSchema}
+                >
+                    <Form>
+                        <Box
+                            component="form"
+                            sx={{
+                                "& > :not(style)": {
+                                    m: 2,
+                                    marginLeft: "30px",
+                                    width: "50ch",
+                                },
+                            }}
+                            noValidate
+                            autoComplete="off"
+                        >
+                            <Field
+                                as={TextField}
+                                id="email"
+                                label="Email"
+                                name="email"
+                                variant="outlined"
+                                helperText={
+                                    <ErrorMessage
+                                        name="email"
+                                        render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
+                                    />
+                                }
+                            />
+
+                            <Field
+                                as={TextField}
+                                id="password"
+                                label="Password"
+                                name="password"
+                                variant="outlined"
+                                type="password"
+                                helperText={
+                                    <ErrorMessage
+                                        name="password"
+                                        render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
+                                    />
+                                }
+                            />
+                        </Box>
+                        <Stack spacing={2} direction="row">
+                            <Button
+                                variant="contained"
+                                id="lbtn"
+                                type="submit"
+                                style={{ width: "445px", marginLeft: "30px" }}
                             >
-                                <Field
-                                    as={TextField}
-                                    id="email"
-                                    label="Email"
-                                    name="email"
-                                    variant="outlined"
-                                    helperText={
-                                        <ErrorMessage
-                                            name="email"
-                                            render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
-                                        />
-                                    }
-                                />
+                                Sign In
+                            </Button>
+                        </Stack>
+                    </Form>
+                </Formik>
 
-                                <Field
-                                    as={TextField}
-                                    id="password"
-                                    label="Password"
-                                    name="password"
-                                    variant="outlined"
-                                    type="password"
-                                    helperText={
-                                        <ErrorMessage
-                                            name="password"
-                                            render={(msg) => <LogErrMsg>{msg}</LogErrMsg>}
-                                        />
-                                    }
-                                />
-                            </Box>
-                            <Stack spacing={2} direction="row">
-                                <Button
-                                    variant="contained"
-                                    id="lbtn"
-                                    type="submit"
-                                    style={{ width: "445px", marginLeft: "30px" }}
-                                >
-                                    Sign In
-                                </Button>
-                            </Stack>
-                        </Form>
-                    </Formik>
-
-                    <Stack spacing={2} direction="row">
-                        <Button
-                            variant="text"
-                            id="cabtn"
-                            style={{ marginTop: "20px", marginLeft: "25px" }}
-                            onClick={navigateRegister}
-                        >
-                            Create Account
-                        </Button>
-                        <Button
-                            variant="text"
-                            id="fpbtn"
-                            style={{ marginTop: "20px", float: "right", marginLeft: "140px" }}
-                            onClick={navigateResetPassword}
-                        >
-                            Forgot Password
-                        </Button>
-                    </Stack>
-                </LoginBody>
-            </LoginContainer>
-        </>
+                <Stack spacing={2} direction="row">
+                    <Button
+                        variant="text"
+                        id="cabtn"
+                        style={{ marginTop: "20px", marginLeft: "25px" }}
+                        onClick={navigateRegister}
+                    >
+                        Create Account
+                    </Button>
+                    <Button
+                        variant="text"
+                        id="fpbtn"
+                        style={{ marginTop: "20px", float: "right", marginLeft: "140px" }}
+                        onClick={navigateResetPassword}
+                    >
+                        Forgot Password
+                    </Button>
+                </Stack>
+            </LoginBody>
+        </LoginContainer>
     );
 }
 

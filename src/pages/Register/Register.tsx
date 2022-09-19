@@ -1,5 +1,4 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -88,83 +87,80 @@ function Register() {
         navigate("/");
     };
     return (
-        <>
-            <CssBaseline />
-            <RegisterContainer>
-                <RegisterBody>
-                    <RegH1Tag>Register</RegH1Tag>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={onSubmit}
-                        validationSchema={validationSchema}
-                    >
-                        <Form>
-                            <Box
-                                component="form"
-                                sx={{
-                                    "& > :not(style)": {
-                                        m: 2,
-                                        marginLeft: "30px",
-                                        width: "50ch",
-                                    },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <Field
-                                    as={TextField}
-                                    id="email"
-                                    label="Email"
-                                    name="email"
-                                    variant="outlined"
-                                    helperText={
-                                        <ErrorMessage
-                                            name="email"
-                                            render={(rmsg) => <RegErrMsg>{rmsg}</RegErrMsg>}
-                                        />
-                                    }
-                                />
-
-                                <Field
-                                    as={TextField}
-                                    id="password"
-                                    label="Password"
-                                    name="password"
-                                    variant="outlined"
-                                    type="password"
-                                    helperText={
-                                        <ErrorMessage
-                                            name="password"
-                                            render={(rmsg) => <RegErrMsg>{rmsg}</RegErrMsg>}
-                                        />
-                                    }
-                                />
-                            </Box>
-                            <Stack spacing={2} direction="row">
-                                <Button
-                                    variant="contained"
-                                    id="rbtn"
-                                    type="submit"
-                                    style={{ marginLeft: "30px", width: "445px" }}
-                                >
-                                    Register
-                                </Button>
-                            </Stack>
-                        </Form>
-                    </Formik>
-                    <Stack spacing={2} direction="row">
-                        <Button
-                            variant="text"
-                            id="bbtn"
-                            style={{ marginTop: "20px", marginLeft: "25px" }}
-                            onClick={navigateLogin}
+        <RegisterContainer>
+            <RegisterBody>
+                <RegH1Tag>Register</RegH1Tag>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                    validationSchema={validationSchema}
+                >
+                    <Form>
+                        <Box
+                            component="form"
+                            sx={{
+                                "& > :not(style)": {
+                                    m: 2,
+                                    marginLeft: "30px",
+                                    width: "50ch",
+                                },
+                            }}
+                            noValidate
+                            autoComplete="off"
                         >
-                            Back
-                        </Button>
-                    </Stack>
-                </RegisterBody>
-            </RegisterContainer>
-        </>
+                            <Field
+                                as={TextField}
+                                id="email"
+                                label="Email"
+                                name="email"
+                                variant="outlined"
+                                helperText={
+                                    <ErrorMessage
+                                        name="email"
+                                        render={(rmsg) => <RegErrMsg>{rmsg}</RegErrMsg>}
+                                    />
+                                }
+                            />
+
+                            <Field
+                                as={TextField}
+                                id="password"
+                                label="Password"
+                                name="password"
+                                variant="outlined"
+                                type="password"
+                                helperText={
+                                    <ErrorMessage
+                                        name="password"
+                                        render={(rmsg) => <RegErrMsg>{rmsg}</RegErrMsg>}
+                                    />
+                                }
+                            />
+                        </Box>
+                        <Stack spacing={2} direction="row">
+                            <Button
+                                variant="contained"
+                                id="rbtn"
+                                type="submit"
+                                style={{ marginLeft: "30px", width: "445px" }}
+                            >
+                                Register
+                            </Button>
+                        </Stack>
+                    </Form>
+                </Formik>
+                <Stack spacing={2} direction="row">
+                    <Button
+                        variant="text"
+                        id="bbtn"
+                        style={{ marginTop: "20px", marginLeft: "25px" }}
+                        onClick={navigateLogin}
+                    >
+                        Back
+                    </Button>
+                </Stack>
+            </RegisterBody>
+        </RegisterContainer>
     );
 }
 

@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import CssBaseline from "@mui/material/CssBaseline";
 
 import styled from "styled-components";
 import TableComponent from "./tableComponent";
@@ -12,7 +11,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { FilterType, SearchArray } from "../types/exTableTypes";
+import { FilterType } from "../types/exTableTypes";
 
 const HistoryPtag = styled.div`
   margin-left: 20px;
@@ -84,37 +83,33 @@ function ExpenseTable() {
   }, []);
 
   return (
+    <div className="exhistory">
+      <HistoryPtag>
+        <p>History</p>
+      </HistoryPtag>
+      <HistorySearch>
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { width: "95.3vw", maxWidth: "100%" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="outlined-size-small"
+            placeholder="Type to Search ..."
+            size="small"
+            value={innerValue}
+            onChange={(e) => setInnerValue(e.target.value)}
+          />
+        </Box>
+      </HistorySearch>
+      <HistoryTable>
+        <TableComponent rows={filterArray} />
+      </HistoryTable>
 
-    <>
-      <CssBaseline />
-      <div className="exhistory">
-        <HistoryPtag>
-          <p>History</p>
-        </HistoryPtag>
-        <HistorySearch>
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { width: "95.3vw", maxWidth: "100%" },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField
-              id="outlined-size-small"
-              placeholder="Type to Search ..."
-              size="small"
-              value={innerValue}
-              onChange={(e) => setInnerValue(e.target.value)}
-            />
-          </Box>
-        </HistorySearch>
-        <HistoryTable>
-          <TableComponent rows={filterArray} />
-        </HistoryTable>
-
-      </div>
-    </>
+    </div>
   );
 }
 

@@ -1,5 +1,4 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
@@ -111,42 +110,39 @@ function ExpenseHome() {
     dispatch(logout({ auth, navigate }));
   };
   return (
-    <>
-      <CssBaseline />
-      <Exhome>
-        <Exheader>
-          <div className="exTracker">
-            <Exh1>Expense Tracker</Exh1>
-          </div>
-          <Signout>
-            <Stack spacing={2} direction="row">
-              <Button
-                variant="contained"
-                id="sobtn"
-                onClick={logOut}
-                style={{ backgroundColor: "#f36d6d" }}
-                sx={{ width: "120px", minWidth: "100%" }}
-              >
-                Sign Out
-              </Button>
-            </Stack>
-          </Signout>
-        </Exheader>
-        <Exstatus>
-          <ExpenseStatus />
-        </Exstatus>
-        <>
-          <CssBaseline />
-          <Extable>
-            <ExpenseTable />
-          </Extable>
+    <Exhome>
+      <Exheader>
+        <div className="exTracker">
+          <Exh1>Expense Tracker</Exh1>
+        </div>
+        <Signout>
+          <Stack spacing={2} direction="row">
+            <Button
+              variant="contained"
+              id="sobtn"
+              onClick={logOut}
+              style={{ backgroundColor: "#f36d6d" }}
+              sx={{ width: "120px", minWidth: "100%" }}
+            >
+              Sign Out
+            </Button>
+          </Stack>
+        </Signout>
+      </Exheader>
 
-          <Addex>
-            <AddExpense />
-          </Addex>
-        </>
-      </Exhome>
-    </>
+      <Exstatus>
+        <ExpenseStatus />
+      </Exstatus>
+
+      <Extable>
+        <ExpenseTable />
+      </Extable>
+
+      <Addex>
+        <AddExpense />
+      </Addex>
+    </Exhome>
+
   );
 }
 

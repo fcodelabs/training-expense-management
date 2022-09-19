@@ -1,5 +1,4 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -119,95 +118,92 @@ function AddExpense() {
     };
 
     return (
-        <>
-            <CssBaseline />
-            <div className="addExpense">
-                <AddEx>
-                    <AddPtag>
-                        <p>Add Expense</p>
-                    </AddPtag>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={onSubmit}
-                        validationSchema={validationSchema}
-                    >
-                        <Form>
-                            <AddBody>
-                                <AddName>
-                                    <p>Name</p>
-                                    <Box
-                                        component="form"
-                                        sx={{
-                                            "& > :not(style)": {
-                                                width: "30ch",
-                                                marginTop: "-15px",
-                                                minWidth: "100%",
-                                            },
-                                        }}
-                                        noValidate
-                                        autoComplete="off"
-                                    >
-                                        <Field
-                                            as={TextField}
-                                            id="exname"
-                                            variant="outlined"
-                                            size="small"
-                                            name="exname"
-                                            helperText={
-                                                <ErrorMessage
-                                                    name="exname"
-                                                    render={(exmsg) => <Exmsg>{exmsg}</Exmsg>}
-                                                />
-                                            }
-                                        />
-                                    </Box>
-                                </AddName>
-                                <AddCost>
-                                    <p>Cost</p>
-                                    <Box
-                                        component="form"
-                                        sx={{
-                                            "& > :not(style)": {
-                                                width: "30ch",
-                                                marginTop: "-15px",
-                                                minWidth: "100%",
-                                            },
-                                        }}
-                                        noValidate
-                                        autoComplete="off"
-                                    >
-                                        <Field
-                                            as={TextField}
-                                            id="excost"
-                                            variant="outlined"
-                                            size="small"
-                                            name="excost"
-                                            helperText={
-                                                <ErrorMessage
-                                                    name="excost"
-                                                    render={(exmsg) => <Exmsg>{exmsg}</Exmsg>}
-                                                />
-                                            }
-                                        />
-                                    </Box>
-                                </AddCost>
-                            </AddBody>
-                            <AddSave>
-                                <Stack spacing={2} direction="row">
-                                    <Button
-                                        variant="contained"
-                                        type="submit"
-                                        sx={{ width: "100px", minWidth: "100%" }}
-                                    >
-                                        Save
-                                    </Button>
-                                </Stack>
-                            </AddSave>
-                        </Form>
-                    </Formik>
-                </AddEx>
-            </div>
-        </>
+        <div className="addExpense">
+            <AddEx>
+                <AddPtag>
+                    <p>Add Expense</p>
+                </AddPtag>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                    validationSchema={validationSchema}
+                >
+                    <Form>
+                        <AddBody>
+                            <AddName>
+                                <p>Name</p>
+                                <Box
+                                    component="form"
+                                    sx={{
+                                        "& > :not(style)": {
+                                            width: "30ch",
+                                            marginTop: "-15px",
+                                            minWidth: "100%",
+                                        },
+                                    }}
+                                    noValidate
+                                    autoComplete="off"
+                                >
+                                    <Field
+                                        as={TextField}
+                                        id="exname"
+                                        variant="outlined"
+                                        size="small"
+                                        name="exname"
+                                        helperText={
+                                            <ErrorMessage
+                                                name="exname"
+                                                render={(exmsg) => <Exmsg>{exmsg}</Exmsg>}
+                                            />
+                                        }
+                                    />
+                                </Box>
+                            </AddName>
+                            <AddCost>
+                                <p>Cost</p>
+                                <Box
+                                    component="form"
+                                    sx={{
+                                        "& > :not(style)": {
+                                            width: "30ch",
+                                            marginTop: "-15px",
+                                            minWidth: "100%",
+                                        },
+                                    }}
+                                    noValidate
+                                    autoComplete="off"
+                                >
+                                    <Field
+                                        as={TextField}
+                                        id="excost"
+                                        variant="outlined"
+                                        size="small"
+                                        name="excost"
+                                        helperText={
+                                            <ErrorMessage
+                                                name="excost"
+                                                render={(exmsg) => <Exmsg>{exmsg}</Exmsg>}
+                                            />
+                                        }
+                                    />
+                                </Box>
+                            </AddCost>
+                        </AddBody>
+                        <AddSave>
+                            <Stack spacing={2} direction="row">
+                                <Button
+                                    variant="contained"
+                                    type="submit"
+                                    sx={{ width: "100px", minWidth: "100%" }}
+                                >
+                                    Save
+                                </Button>
+                            </Stack>
+                        </AddSave>
+                    </Form>
+                </Formik>
+            </AddEx>
+        </div>
     );
 }
 
