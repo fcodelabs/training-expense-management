@@ -136,7 +136,6 @@ function LogIn() {
                                     id="lbtn"
                                     type="submit"
                                     style={{ width: "445px", marginLeft: "30px" }}
-                                    onClick={navigateExpenseHome}
                                 >
                                     Sign In
                                 </Button>
