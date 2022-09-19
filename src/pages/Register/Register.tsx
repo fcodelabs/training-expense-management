@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
-const Login = styled.div`
+const Reg = styled.div`
   @media (min-width: 1200px) {
     background-color: #c2d6d6;
     height: 100vh;
@@ -26,7 +26,7 @@ const Login = styled.div`
   }
 `;
 
-const Lbody = styled.div`
+const Rbody = styled.div`
   width: 500px;
   height: 500px;
   background-color: white;
@@ -44,23 +44,26 @@ const Lbody = styled.div`
   }
 `;
 
-const Lh1 = styled.h1`
+const Rh1 = styled.h1`
   margin-left: 30px;
   margin-top: 20px;
 `;
 
-const ErrMsg = styled.span`
+const Rmsg = styled.span`
   color: red;
 `;
 
-function LogIn() {
+function Register() {
     const initialValues = {
         email: "",
         password: "",
     };
     const validationSchema = yup.object().shape({
         email: yup.string().email("Please Enter Valid Email").required("Required"),
-        password: yup.string().required("Required"),
+        password: yup
+            .string()
+            .min(8, "Password should be of minimum 8 characters length")
+            .required("Required"),
     });
     const onSubmit = (values: any) => {
         console.log(values);
@@ -68,15 +71,15 @@ function LogIn() {
 
     const navigate = useNavigate();
 
-    const navigateRegister = () => {
-        navigate("/register");
-    }
+    const navigateLogin = () => {
+        navigate("/");
+    };
     return (
-        <>
+        <React.Fragment>
             <CssBaseline />
-            <Login>
-                <Lbody>
-                    <Lh1>Login</Lh1>
+            <Reg>
+                <Rbody>
+                    <Rh1>Register</Rh1>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
@@ -104,7 +107,7 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="email"
-                                            render={(msg) => <ErrMsg>{msg}</ErrMsg>}
+                                            render={(rmsg) => <Rmsg>{rmsg}</Rmsg>}
                                         />
                                     }
                                 />
@@ -119,7 +122,9 @@ function LogIn() {
                                     helperText={
                                         <ErrorMessage
                                             name="password"
-                                            render={(msg) => <ErrMsg>{msg}</ErrMsg>}
+                                            render={(rmsg) => (
+                                                <span className="rej-err-msg">{rmsg}</span>
+                                            )}
                                         />
                                     }
                                 />
@@ -127,32 +132,29 @@ function LogIn() {
                             <Stack spacing={2} direction="row">
                                 <Button
                                     variant="contained"
-                                    id="lbtn"
+                                    id="rbtn"
                                     type="submit"
-                                    style={{ width: "445px", marginLeft: "30px" }}
+                                    style={{ marginLeft: "30px", width: "445px" }}
                                 >
-                                    Sign In
+                                    Register
                                 </Button>
                             </Stack>
                         </Form>
                     </Formik>
-
                     <Stack spacing={2} direction="row">
-                        <Button variant="text" id="cabtn" onClick={navigateRegister}>
-                            Create Account
-                        </Button>
                         <Button
                             variant="text"
-                            id="fpbtn"
-                            style={{ marginTop: "20px", float: "right", marginLeft: "140px" }}
+                            id="bbtn"
+                            style={{ marginTop: "20px", marginLeft: "25px" }}
+                            onClick={navigateLogin}
                         >
-                            Forgot Password
+                            Back
                         </Button>
                     </Stack>
-                </Lbody>
-            </Login>
-        </>
+                </Rbody>
+            </Reg>
+        </React.Fragment>
     );
 }
 
-export default LogIn;
+export default Register;
