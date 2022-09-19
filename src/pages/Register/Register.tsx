@@ -153,7 +153,11 @@ function Register() {
                     </Stack>
                 </Rbody>
             </Reg>
+<<<<<<< HEAD
         </>
+=======
+        </React.Fragment>
+>>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
     );
 }
 

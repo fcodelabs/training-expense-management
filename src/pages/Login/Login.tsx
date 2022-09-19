@@ -136,7 +136,10 @@ function LogIn() {
                                     id="lbtn"
                                     type="submit"
                                     style={{ width: "445px", marginLeft: "30px" }}
+<<<<<<< HEAD
                                     onClick={navigateExpenseHome}
+=======
+>>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
                                 >
                                     Sign In
                                 </Button>
@@ -157,7 +160,10 @@ function LogIn() {
                             variant="text"
                             id="fpbtn"
                             style={{ marginTop: "20px", float: "right", marginLeft: "140px" }}
+<<<<<<< HEAD
                             onClick={navigateResetPassword}
+=======
+>>>>>>> 19f5a1a94fcf8868fd233e80d2e71d06b233687d
                         >
                             Forgot Password
                         </Button>
