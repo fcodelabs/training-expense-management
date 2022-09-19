@@ -1,5 +1,3 @@
-import "../../utils/register.css";
-
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -11,6 +9,50 @@ import * as yup from "yup";
 
 import { useNavigate } from "react-router-dom";
 
+import styled from "styled-components";
+
+const Reg = styled.div`
+  @media (min-width: 1200px) {
+    background-color: #c2d6d6;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+
+  @media (max-width: 480px) {
+    background-color: none;
+  }
+`;
+
+const Rbody = styled.div`
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  opacity: 0.8;
+  align-items: center;
+  margin: auto;
+  padding-top: 25px;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 150px;
+  }
+`;
+
+const Rh1 = styled.h1`
+  margin-left: 30px;
+  margin-top: 20px;
+`;
+
+const Rmsg = styled.span`
+  color: red;
+`;
+
 function Register() {
     const initialValues = {
         email: "",
@@ -18,7 +60,10 @@ function Register() {
     };
     const validationSchema = yup.object().shape({
         email: yup.string().email("Please Enter Valid Email").required("Required"),
-        password: yup.string().min(8, "Password should be of minimum 8 characters length").required("Required"),
+        password: yup
+            .string()
+            .min(8, "Password should be of minimum 8 characters length")
+            .required("Required"),
     });
     const onSubmit = (values: any) => {
         console.log(values);
@@ -32,9 +77,9 @@ function Register() {
     return (
         <React.Fragment>
             <CssBaseline />
-            <div className="Register">
-                <div className="rbody">
-                    <h1 id="rh1">Register</h1>
+            <Reg>
+                <Rbody>
+                    <Rh1>Register</Rh1>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
@@ -53,7 +98,8 @@ function Register() {
                                 noValidate
                                 autoComplete="off"
                             >
-                                <Field as={TextField}
+                                <Field
+                                    as={TextField}
                                     id="email"
                                     label="Email"
                                     name="email"
@@ -61,12 +107,13 @@ function Register() {
                                     helperText={
                                         <ErrorMessage
                                             name="email"
-                                            render={(rmsg) => <span className="rej-err-msg">{rmsg}</span>}
+                                            render={(rmsg) => <Rmsg>{rmsg}</Rmsg>}
                                         />
                                     }
                                 />
 
-                                <Field as={TextField}
+                                <Field
+                                    as={TextField}
                                     id="password"
                                     label="Password"
                                     name="password"
@@ -75,25 +122,37 @@ function Register() {
                                     helperText={
                                         <ErrorMessage
                                             name="password"
-                                            render={(rmsg) => <span className="rej-err-msg">{rmsg}</span>}
+                                            render={(rmsg) => (
+                                                <span className="rej-err-msg">{rmsg}</span>
+                                            )}
                                         />
                                     }
                                 />
                             </Box>
                             <Stack spacing={2} direction="row">
-                                <Button variant="contained" id="rbtn" type="submit">
+                                <Button
+                                    variant="contained"
+                                    id="rbtn"
+                                    type="submit"
+                                    style={{ marginLeft: "30px", width: "445px" }}
+                                >
                                     Register
                                 </Button>
                             </Stack>
                         </Form>
                     </Formik>
                     <Stack spacing={2} direction="row">
-                        <Button variant="text" id="bbtn" onClick={navigateLogin}>
+                        <Button
+                            variant="text"
+                            id="bbtn"
+                            style={{ marginTop: "20px", marginLeft: "25px" }}
+                            onClick={navigateLogin}
+                        >
                             Back
                         </Button>
                     </Stack>
-                </div>
-            </div>
+                </Rbody>
+            </Reg>
         </React.Fragment>
     );
 }
