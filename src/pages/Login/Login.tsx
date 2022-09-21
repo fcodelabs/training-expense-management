@@ -71,6 +71,9 @@ function LogIn() {
     const navigateRegister = () => {
         navigate("/register");
     }
+    const navigateResetPassword = () => {
+        navigate("/resetPassword");
+    }
     return (
         <>
             <CssBaseline />
@@ -141,11 +144,7 @@ function LogIn() {
                         <Button variant="text" id="cabtn" onClick={navigateRegister}>
                             Create Account
                         </Button>
-                        <Button
-                            variant="text"
-                            id="fpbtn"
-                            style={{ marginTop: "20px", float: "right", marginLeft: "140px" }}
-                        >
+                        <Button variant="text" id="fpbtn" onClick={navigateResetPassword}>
                             Forgot Password
                         </Button>
                     </Stack>
